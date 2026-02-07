@@ -248,7 +248,7 @@ export const ControlPanel: React.FC<UserControlPanelProps> = ({
                 </select>
             </div>
 
-            <div className="control-group" style={{ borderBottom: '1px solid #555', paddingBottom: '15px', marginBottom: '15px' }}>
+            <div className="control-group" style={{ borderBottom: '1px solid #555', paddingBottom: '15px', marginBottom: '15px', display: 'none' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
                     <label>Time Scale (Speed)</label>
                     <input
