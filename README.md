@@ -1,73 +1,39 @@
-# React + TypeScript + Vite
+# VVVF シミュレーター
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Web Audio API を使用した、ブラウザ上で動作する VVVF (可変電圧可変周波数) インバータ音のシミュレーターです。
+React + TypeScript + Vite で構築されています。
 
-Currently, two official plugins are available:
+## 公開ページ
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+GitHub Pages で公開されています:
+https://karuru6225.github.io/vvvf-sim/
 
-## React Compiler
+## 機能
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **リアルタイム音声生成**: AudioWorklet を使用して、PWM波形をリアルタイムに生成します。
+- **波形表示**: 出力される波形を視覚的に確認できます。
+- **パラメータ調整**: キャリア周波数や変調方式などを調整可能です。
 
-## Expanding the ESLint configuration
+## 開発環境のセットアップ
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1.  依存関係のインストール:
+    ```bash
+    npm install
+    ```
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+2.  開発サーバーの起動:
+    ```bash
+    npm run dev
+    ```
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## デプロイ
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+このプロジェクトは GitHub Actions を使用して自動デプロイされるように設定されています。
+`main` ブランチにプッシュすると、自動的にビルドされ `gh-pages` ブランチにデプロイされます。
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 技術スタック
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+-   React
+-   TypeScript
+-   Vite
+-   Web Audio API (AudioWorklet)
