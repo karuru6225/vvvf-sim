@@ -94,4 +94,30 @@ const EarlyGTO: VVVFPattern = {
     }
 };
 
-export const Patterns = [StandardIGBT, SingingGTO, EarlyGTO];
+const ToshibaGTO_207: VVVFPattern = {
+    name: "Toshiba GTO (207-1000)",
+    description: "Used in JR West 207-1000 series. Distinctive high-pitched asynchronous whir.",
+    calculate: (f) => {
+        // Voltage
+        let voltage = Math.min((f / 60) * 1.0, 1.0);
+        if (f > 60) voltage = 1.0;
+
+        let carrier = 365; // Initial carrier
+        let mode: PulseMode = 'Async';
+
+        // Frequency ranges based on typical Toshiba GTO behavior
+        // Async: Start around 365Hz, slightly varying or constant?
+        // Let's assume constant 1050Hz for async based on some sources, or slightly decreasing.
+        // Sync modes: P7 -> P5 -> P3 -> P1
+        if (f < 12.5) { carrier = 365; mode = 'Async'; }
+        else if (f < 30) { mode = 'P15'; } // 45-58Hz
+        else if (f < 43) { mode = 'P9'; } // 58-70Hz
+        else if (f < 53) { mode = 'P5'; } // 70-85Hz
+        else if (f < 60) { mode = 'P3'; } // 70-85Hz
+        else { mode = 'P1'; }             // 85Hz+
+
+        return { voltage, carrierFreq: carrier, pulseMode: mode };
+    }
+};
+
+export const Patterns = [StandardIGBT, SingingGTO, EarlyGTO, ToshibaGTO_207];
